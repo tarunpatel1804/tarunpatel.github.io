@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dr. Veena Patel - BDS Graduate, NEET-MDS Aspirant. Dental Surgeon Portfolio.">
+    <title>Dr. Veena Patel | BDS | Dental Surgeon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #0d9488;        /* teal-600 */
+            --primary-dark: #0f766e;   /* teal-700 */
+            --primary-light: #ccfbf1;  /* teal-100 */
+            --accent: #f43f5e;         /* rose-500 */
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(13, 148, 136, 0.08);
+            --shadow-lg: 0 20px 50px rgba(13, 148, 136, 0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1150px; margin: 0 auto; padding: 0 20px; }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            z-index: 1000;
+            padding: 14px 0;
+        }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: var(--primary-dark);
+        }
+        .nav-brand i { margin-right: 8px; color: var(--primary); }
+        .nav-menu { list-style: none; display: flex; gap: 28px; }
+        .nav-menu a {
+            text-decoration: none; color: var(--text);
+            font-weight: 500; font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .nav-menu a:hover { color: var(--primary); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 25px; height: 3px; background: var(--primary-dark); border-radius: 2px; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            padding: 120px 0 60px;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(204,251,241,0.6), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(244,63,94,0.08), transparent 50%),
+                linear-gradient(135deg, #ffffff 0%, #f0fdfa 100%);
+            display: flex; align-items: center;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-title {
+            font-size: 3.4rem;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        .hero-title .highlight { color: var(--primary); }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--primary-dark);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            margin-bottom: 28px;
+            max-width: 560px;
+        }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn {
+            padding: 13px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 6px 20px rgba(13,148,136,0.3);
+        }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .btn-secondary {
+            background: white; color: var(--primary-dark);
+            border: 2px solid var(--primary);
+        }
+        .btn-secondary:hover { background: var(--primary-light); }
+
+        .hero-avatar {
+            justify-self: center;
+            width: 320px; height: 320px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .hero-avatar::before {
+            content: '';
+            position: absolute; inset: -12px;
+            border-radius: 50%;
+            border: 2px dashed var(--primary);
+            opacity: 0.4;
+            animation: spin 30s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .hero-avatar i { font-size: 8rem; color: white; }
+
+        /* Sections */
+        section { padding: 90px 0; }
+        .section-title {
+            text-align: center;
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+        .section-title span { color: var(--primary); }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            font-size: 1rem;
+        }
+
+        /* About */
+        .about { background: white; }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 16px;
+            font-size: 1.02rem;
+        }
+        .info-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+        .info-card {
+            background: var(--bg);
+            padding: 22px;
+            border-radius: 14px;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        .info-card:hover { transform: translateY(-4px); }
+        .info-card i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .info-card h4 { font-family: 'Poppins', sans-serif; font-size: 0.85rem; color: var(--text-light); font-weight: 500; margin-bottom: 4px; }
+        .info-card p { font-weight: 600; color: var(--text); font-size: 0.95rem; }
+
+        /* Education */
+        .education { background: var(--bg); }
+        .timeline {
+            max-width: 800px; margin: 0 auto;
+            position: relative;
+            padding-left: 30px;
+            border-left: 3px solid var(--primary-light);
+        }
+        .timeline-item {
+            position: relative;
+            background: white;
+            padding: 22px 26px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -41px; top: 24px;
+            width: 16px; height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        .timeline-item h3 { font-size: 1.25rem; color: var(--primary-dark); margin-bottom: 4px; }
+        .timeline-item .institute { color: var(--text); font-weight: 500; margin-bottom: 4px; }
+        .timeline-item .duration { font-size: 0.88rem; color: var(--text-light); }
+
+        /* Experience */
+        .experience { background: white; }
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 22px;
+        }
+        .exp-card {
+            background: linear-gradient(135deg, #ffffff, #f0fdfa);
+            padding: 26px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+        .exp-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+        .exp-icon {
+            width: 52px; height: 52px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px;
+        }
+        .exp-icon i { font-size: 1.5rem; color: var(--primary-dark); }
+        .exp-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        .exp-card p { font-size: 0.93rem; color: var(--text-light); }
+
+        .highlight-banner {
+            margin-top: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 26px;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+        }
+        .highlight-banner i { margin-right: 10px; }
+
+        /* Skills */
+        .skills { background: var(--bg); }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        .skill-chip {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: flex; align-items: center; gap: 12px;
+            transition: all 0.3s;
+        }
+        .skill-chip:hover {
+            transform: translateX(6px);
+            border-left: 4px solid var(--primary);
+        }
+        .skill-chip i { color: var(--primary); font-size: 1.1rem; }
+        .skill-chip span { font-size: 0.93rem; font-weight: 500; }
+
+        /* Achievements */
+        .achievements { background: white; }
+        .ach-list {
+            max-width: 850px;
+            margin: 0 auto;
+            display: grid;
+            gap: 16px;
+        }
+        .ach-item {
+            display: flex; gap: 18px;
+            background: var(--bg);
+            padding: 20px 24px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        .ach-item:hover { background: var(--primary-light); }
+        .ach-item i {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-top: 2px;
+        }
+        .ach-item p { color: var(--text); font-size: 0.98rem; }
+
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+        }
+        .contact .section-title, .contact .section-subtitle { color: white; }
+        .contact .section-title span { color: #fde68a; }
+        .contact .section-subtitle { opacity: 0.9; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        .contact-card {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(8px);
+            padding: 28px 22px;
+            border-radius: 14px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.18);
+            transition: all 0.3s;
+        }
+        .contact-card:hover { background: rgba(255,255,255,0.18); transform: translateY(-4px); }
+        .contact-card i { font-size: 2rem; margin-bottom: 12px; color: #fde68a; }
+        .contact-card h4 { font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 6px; opacity: 0.85; }
+        .contact-card a, .contact-card p {
+            color: white; text-decoration: none; font-weight: 500; font-size: 1rem;
+            word-break: break-word;
+        }
+        .contact-card a:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 24px 0;
+            font-size: 0.9rem;
+        }
+        footer i { color: var(--accent); }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .nav-menu { display: none; }
+            .hamburger { display: flex; }
+            .nav-menu.active {
+                display: flex;
+                position: absolute; top: 60px; left: 0; right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                gap: 18px;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            }
+            .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-title { font-size: 2.3rem; }
+            .hero-avatar { width: 240px; height: 240px; }
+            .hero-avatar i { font-size: 6rem; }
+            .section-title { font-size: 1.9rem; }
+            section { padding: 60px 0; }
+            .info-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand"><i class="fas fa-tooth"></i>Dr. Veena Patel</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <h1 class="hero-title">Hi, I'm <span class="highlight">Dr. Veena Patel</span></h1>
+                    <p class="hero-subtitle">BDS &middot; NEET-MDS Aspirant</p>
+                    <p class="hero-description">
+                        A dedicated dental surgeon passionate about delivering compassionate, evidence-based care.
+                        Trained across all dental specialties with hands-on experience treating
+                        <strong>1000+ patients</strong> through clinical and community outreach programs.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#experience" class="btn btn-primary"><i class="fas fa-stethoscope"></i> My Experience</a>
+                        <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero-avatar">
+                    <i class="fas fa-user-md"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About <span>Me</span></h2>
+            <p class="section-subtitle">A compassionate clinician with comprehensive specialty exposure</p>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        I'm a dedicated and adaptable <strong>BDS graduate</strong> with strong clinical adaptability,
+                        effective patient communication, and a collaborative approach to patient care.
+                    </p>
+                    <p>
+                        With comprehensive exposure across all dental specialties — from preventive and restorative
+                        dentistry to oral surgery — I have successfully treated and assisted in the care of
+                        over <strong>1000 patients</strong>, combining clinical excellence with compassionate care.
+                    </p>
+                    <p>
+                        I'm currently preparing for <strong>NEET-MDS</strong> to pursue specialization, while
+                        contributing as a junior/locum dentist in dynamic clinical settings.
+                    </p>
+                </div>
+                <div class="info-cards">
+                    <div class="info-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Qualification</h4>
+                        <p>BDS (2020–2026)</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-user-injured"></i>
+                        <h4>Patients Treated</h4>
+                        <p>1000+</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Location</h4>
+                        <p>Raipur, Chhattisgarh</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-language"></i>
+                        <h4>Languages</h4>
+                        <p>English, Hindi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="education">
+        <div class="container">
+            <h2 class="section-title">Education <span>Journey</span></h2>
+            <p class="section-subtitle">Academic foundation in dentistry and sciences</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Bachelor of Dental Surgery (BDS)</h3>
+                    <p class="institute">Government Dental College, Raipur</p>
+                    <p class="duration"><i class="far fa-calendar-alt"></i> 2020 – 2026</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Senior Secondary (Class XII, CBSE)</h3>
+                    <p class="institute">Kendriya Vidyalaya, Durg</p>
+                    <p class="duration"><i class="far fa-calendar-alt"></i> 2018</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Clinical <span>Experience</span></h2>
+            <p class="section-subtitle">Hands-on training across every dental specialty</p>
+            <div class="exp-grid">
+                <div class="exp-card">
+                    <div class="exp-icon"><i class="fas fa-notes-medical"></i></div>
+                    <h3>Oral Medicine & Diagnosis</h3>
+                    <p>Managed OPD, diagnosed oral lesions, cancer screening, X-ray, OPG, and cephalogram interpretation.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-icon"><i class="fas fa-tooth"></i></div>
+                    <h3>Conservative & Endodontics</h3>
+                    <p>RCT, amalgam, composite, GIC restorations; IPC/DPC, esthetic anterior restorations, and miracle restorations.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-icon"><i class="fas fa-procedures"></i></div>
+                    <h3>Oral Surgery</h3>
+                    <p>Performed extractions; assisted in arch bar wiring, condylar/zygomatic fractures, abscess drainage, alveoplasty, impacted tooth surgery.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-icon"><i class="fas fa-teeth"></i></div>
+                    <h3>Prosthodontics</h3>
+                    <p>Fabricated complete dentures, RPD impressions, crown & bridgework with precision and esthetics in mind.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-icon"><i class="fas fa-child"></i></div>
+                    <h3>Pedodontics</h3>
+                    <p>GIC restorations, extractions in children, and preventive dentistry with child-friendly chair-side approach.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-icon"><i class="fas fa-teeth-open"></i></div>
+                    <h3>Periodontics</h3>
+                    <p>Scaling, root planing, flap surgeries, and assisted in implant cases for comprehensive gum care.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Orthodontics</h3>
+                    <p>Wire bending, model analysis; fabricated clasps, springs, tongue cribs, and assisted in fixed appliance cases.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-icon"><i class="fas fa-microscope"></i></div>
+                    <h3>Oral Pathology</h3>
+                    <p>Performed biopsies and advised blood investigations for dental procedures and lesion diagnosis.</p>
+                </div>
+                <div class="exp-card">
+                    <div class="exp-icon"><i class="fas fa-hands-helping"></i></div>
+                    <h3>Community Dentistry</h3>
+                    <p>Organized rural camps, Mega Health Camp 2025, school dental programs, and worked at PHC level.</p>
+                </div>
+            </div>
+            <div class="highlight-banner">
+                <i class="fas fa-award"></i>
+                Treated and assisted <strong>1000+ patients</strong> across all dental specialties.
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Core <span>Skills</span></h2>
+            <p class="section-subtitle">Clinical, interpersonal & technical strengths</p>
+            <div class="skills-grid">
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Patient Management & Chair-side Communication</span></div>
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Clinical Diagnosis & Case Documentation</span></div>
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Radiographic Techniques (X-ray, OPG, Cephalogram)</span></div>
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Restorative Dentistry (GIC, Composite, Amalgam)</span></div>
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Endodontics (IPC/DPC, RCT, Esthetic Restorations)</span></div>
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Prosthodontics (Dentures, RPD, Crown & Bridge)</span></div>
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Oral Surgery (Extractions, Alveoplasty, Impactions)</span></div>
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Pediatric Dentistry</span></div>
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Multidisciplinary Teamwork</span></div>
+                <div class="skill-chip"><i class="fas fa-check-circle"></i><span>Compassionate Patient Care</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements" class="achievements">
+        <div class="container">
+            <h2 class="section-title">Achievements & <span>Highlights</span></h2>
+            <p class="section-subtitle">Conferences, recognitions, and contributions</p>
+            <div class="ach-list">
+                <div class="ach-item"><i class="fas fa-trophy"></i><p>Successfully treated and assisted in the management of <strong>1000+ patients</strong> during BDS training.</p></div>
+                <div class="ach-item"><i class="fas fa-heart"></i><p>Recognized for delivering grateful smiles and blessings from patients.</p></div>
+                <div class="ach-item"><i class="fas fa-chalkboard-teacher"></i><p>Presented clinical cases at academic seminars in Government Dental College, Raipur.</p></div>
+                <div class="ach-item"><i class="fas fa-hand-holding-medical"></i><p>Contributed to rural dental health camps and school dental programs.</p></div>
+                <div class="ach-item"><i class="fas fa-running"></i><p>Represented college in sports and extracurricular activities.</p></div>
+                <div class="ach-item"><i class="fas fa-certificate"></i><p>Attended workshop on <strong>Laser Surgery in Dentistry</strong>.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In <span>Touch</span></h2>
+            <p class="section-subtitle">Open to junior/locum opportunities and collaborations</p>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h4>Phone</h4>
+                    <a href="tel:+917974602868">+91 79746 02868</a>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <a href="mailto:veenap2105@gmail.com">veenap2105@gmail.com</a>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Location</h4>
+                    <p>Raipur, Chhattisgarh, India</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Dr. Veena Patel &middot; Made with <i class="fas fa-heart"></i> for compassionate dental care</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => navMenu.classList.remove('active'));
+        });
+    </script>
+</body>
+</html>
