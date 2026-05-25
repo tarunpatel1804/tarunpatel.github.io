@@ -75,6 +75,26 @@ body {
     color: var(--accent);
 }
 
+.nav-menu a.nav-sister {
+    background: linear-gradient(135deg, #0d9488, #0f766e);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-menu a.nav-sister:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(13, 148, 136, 0.45);
+}
+
+.nav-menu a.nav-sister i {
+    margin-right: 4px;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
