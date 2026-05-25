@@ -355,6 +355,115 @@
         }
         footer i { color: var(--accent); }
 
+        /* Gallery */
+        .gallery { background: white; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            background: var(--primary-light);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .gallery-item img, .gallery-item video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .gallery-item:hover img, .gallery-item:hover video { transform: scale(1.08); }
+        .gallery-item .gallery-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(15, 118, 110, 0.7), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex; align-items: flex-end; justify-content: center;
+            padding: 16px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-item.video-item::after {
+            content: '\f04b';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px; height: 60px;
+            background: rgba(13, 148, 136, 0.85);
+            color: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            pointer-events: none;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            display: none;
+            align-items: center; justify-content: center;
+            z-index: 2000;
+            padding: 30px;
+            animation: fadeIn 0.25s ease;
+        }
+        .lightbox.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .lightbox-content {
+            max-width: 92vw;
+            max-height: 88vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .lightbox-content img, .lightbox-content video {
+            max-width: 92vw;
+            max-height: 88vh;
+            border-radius: 10px;
+            display: block;
+        }
+        .lightbox-close, .lightbox-prev, .lightbox-next {
+            position: absolute;
+            background: rgba(255,255,255,0.12);
+            color: white;
+            border: none;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+            backdrop-filter: blur(10px);
+        }
+        .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.1);
+        }
+        .lightbox-close { top: 24px; right: 24px; }
+        .lightbox-prev { left: 24px; top: 50%; transform: translateY(-50%); }
+        .lightbox-next { right: 24px; top: 50%; transform: translateY(-50%); }
+        .lightbox-prev:hover, .lightbox-next:hover { transform: translateY(-50%) scale(1.1); }
+        .lightbox-counter {
+            position: absolute;
+            bottom: 24px; left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background: rgba(0,0,0,0.5);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
         /* Responsive */
         @media (max-width: 860px) {
             .nav-menu { display: none; }
@@ -375,6 +484,11 @@
             .section-title { font-size: 1.9rem; }
             section { padding: 60px 0; }
             .info-cards { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+            .lightbox-close, .lightbox-prev, .lightbox-next { width: 42px; height: 42px; font-size: 1.1rem; }
+            .lightbox-close { top: 14px; right: 14px; }
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
         }
     </style>
 </head>
@@ -389,6 +503,7 @@
                 <li><a href="#education">Education</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#achievements">Achievements</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -568,6 +683,44 @@
         </div>
     </section>
 
+    <!-- Gallery -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Clinical <span>Gallery</span></h2>
+            <p class="section-subtitle">Moments from clinical practice, camps & college life</p>
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-01.jpeg"><img src="Veena_dental/gallery-01.jpeg" alt="Dental moment 1" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-02.jpeg"><img src="Veena_dental/gallery-02.jpeg" alt="Dental moment 2" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-03.jpeg"><img src="Veena_dental/gallery-03.jpeg" alt="Dental moment 3" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-04.jpeg"><img src="Veena_dental/gallery-04.jpeg" alt="Dental moment 4" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-05.jpeg"><img src="Veena_dental/gallery-05.jpeg" alt="Dental moment 5" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-06.jpeg"><img src="Veena_dental/gallery-06.jpeg" alt="Dental moment 6" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-07.jpeg"><img src="Veena_dental/gallery-07.jpeg" alt="Dental moment 7" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-08.jpeg"><img src="Veena_dental/gallery-08.jpeg" alt="Dental moment 8" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item video-item" data-type="video" data-src="Veena_dental/video-01.mp4"><video src="Veena_dental/video-01.mp4" muted preload="metadata"></video><div class="gallery-overlay"></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-09.jpeg"><img src="Veena_dental/gallery-09.jpeg" alt="Dental moment 9" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-10.jpeg"><img src="Veena_dental/gallery-10.jpeg" alt="Dental moment 10" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-11.jpeg"><img src="Veena_dental/gallery-11.jpeg" alt="Dental moment 11" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-12.jpeg"><img src="Veena_dental/gallery-12.jpeg" alt="Dental moment 12" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-13.jpeg"><img src="Veena_dental/gallery-13.jpeg" alt="Dental moment 13" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item video-item" data-type="video" data-src="Veena_dental/video-02.mp4"><video src="Veena_dental/video-02.mp4" muted preload="metadata"></video><div class="gallery-overlay"></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-14.jpeg"><img src="Veena_dental/gallery-14.jpeg" alt="Dental moment 14" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-15.jpeg"><img src="Veena_dental/gallery-15.jpeg" alt="Dental moment 15" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-16.jpeg"><img src="Veena_dental/gallery-16.jpeg" alt="Dental moment 16" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+                <div class="gallery-item" data-type="image" data-src="Veena_dental/gallery-17.jpeg"><img src="Veena_dental/gallery-17.jpeg" alt="Dental moment 17" loading="lazy"><div class="gallery-overlay"><i class="fas fa-search-plus"></i></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fas fa-times"></i></button>
+        <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-next" id="lightboxNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-content" id="lightboxContent"></div>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+
     <!-- Achievements -->
     <section id="achievements" class="achievements">
         <div class="container">
@@ -623,6 +776,61 @@
         hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => navMenu.classList.remove('active'));
+        });
+
+        // Lightbox
+        const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightboxContent');
+        const lightboxCounter = document.getElementById('lightboxCounter');
+        let currentIndex = 0;
+
+        function renderLightbox(index) {
+            const item = galleryItems[index];
+            const type = item.dataset.type;
+            const src = item.dataset.src;
+            if (type === 'video') {
+                lightboxContent.innerHTML = `<video src="${src}" controls autoplay playsinline></video>`;
+            } else {
+                lightboxContent.innerHTML = `<img src="${src}" alt="Gallery image">`;
+            }
+            lightboxCounter.textContent = `${index + 1} / ${galleryItems.length}`;
+            currentIndex = index;
+        }
+
+        function openLightbox(index) {
+            renderLightbox(index);
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightboxContent.innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        galleryItems.forEach((item, i) => {
+            item.addEventListener('click', () => openLightbox(i));
+        });
+
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightboxPrev').addEventListener('click', (e) => {
+            e.stopPropagation();
+            renderLightbox((currentIndex - 1 + galleryItems.length) % galleryItems.length);
+        });
+        document.getElementById('lightboxNext').addEventListener('click', (e) => {
+            e.stopPropagation();
+            renderLightbox((currentIndex + 1) % galleryItems.length);
+        });
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') renderLightbox((currentIndex - 1 + galleryItems.length) % galleryItems.length);
+            if (e.key === 'ArrowRight') renderLightbox((currentIndex + 1) % galleryItems.length);
         });
     </script>
 </body>
